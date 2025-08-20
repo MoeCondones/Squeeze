@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question</title>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        
+        .response-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .yes-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+        
+        .no-btn {
+            background: linear-gradient(45deg, #ff6b6b, #c44569);
+        }
+        
+        .final-message {
+            font-size: 1.3em;
+            line-height: 1.5;
+        }
+        
+        .hearts {
+            font-size: 2em;
+            animation: bounce 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-10px); }
+        }
+        
+        .confetti {
+            position: fixed;
+            top: -10px;
+            z-index: 1000;
+            pointer-events: none;
+            font-size: 20px;
+            animation: fall 3s linear infinite;
+        }
+        
+        .angry-face {
+            position: fixed;
+            top: -10px;
+            z-index: 1000;
+            pointer-events: none;
+            font-size: 30px;
+            animation: fall 2s linear infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .lottie-animation {
+            margin: 20px auto;
+            display: block;
+        }
+        
+        
+        .response-buttons {
+            position: relative;
+        }
+        
+        .angry-popup {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translate(-50%) scale(0);
+            z-index: 1000;
+            animation: popupGrow 1s ease-out forwards;
+        }
+        
+        @keyframes popupGrow {
+            0% { 
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .form-notice {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Step 1: Name -->
+        <div class="step active" id="step1">
+            <h1>Hey Beautiful! 💫</h1>
+            
+            <!-- Cute kitty animation on first page -->
+            <dotlottie-wc src="https://lottie.host/6a3162cd-abff-4712-a922-c4f1f9a63529/CVfwhRKNmG.lottie" 
+                           style="width: 200px; height: 200px; margin: 20px auto; display: block;" 
+                           speed="1" autoplay loop></dotlottie-wc>
+            
+            <input type="text" id="nameInput" placeholder="What's your name?" maxlength="50">
+            <br>
+            <button onclick="nextStep(1)">Next ✨</button>
+        </div>
+        
+        <!-- Step 2: Age -->
+        <div class="step" id="step2">
+            <h1>Nice to meet you, <span id="displayName"></span>! 😊</h1>
+            <input type="number" id="ageInput" placeholder="How old are you?" min="18" max="100">
+            <br>
+            <button onclick="nextStep(2)">Next 💕</button>
+        </div>
+        
+        <!-- Step 3: The Question -->
+        <div class="step" id="step3">
+            <h1>Alright <span id="displayName2"></span>...</h1>
+            <div class="question">
+                U trynna be my main squeeze? 😏😉
+            </div>
+            <div class="response-buttons">
+                <button class="yes-btn" onclick="respond('yes')" id="yesButton">Yes! 💖</button>
+                <button class="no-btn" onclick="respond('no')">Nah 💔</button>
+            </div>
+        </div>
+        
+        <!-- Step 4: Response -->
+        <div class="step" id="step4">
+            <div id="finalMessage" class="final-message"></div>
+            <div class="form-notice" id="formNotice"></div>
+        </div>
+    </div>
+
+    <!-- Hidden form for email notification -->
+    <form id="emailForm" style="display: none;">
+        <input name="name" id="hiddenName">
+        <input name="age" id="hiddenAge">
+        <input name="response" id="hiddenResponse">
+        <input name="timestamp" id="hiddenTimestamp">
+    </form>
+
+    <script>
+        let userData = {};
+        
+        function nextStep(currentStep) {
+            if (currentStep === 1) {
+                const name = document.getElementById('nameInput').value.trim();
+                if (!name) {
+                    alert('Please enter your name! 💕');
+                    return;
+                }
+                userData.name = name;
+                document.getElementById('displayName').textContent = name;
+                document.getElementById('displayName2').textContent = name;
+            }
+            
+            if (currentStep === 2) {
+                const age = document.getElementById('ageInput').value;
+                if (!age || age < 18) {
+                    alert('Please enter a valid age (18+)! 🎂');
+                    return;
+                }
+                userData.age = age;
+            }
+            
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + (currentStep + 1)).classList.add('active');
+        }
+        
+        function respond(answer) {
+            userData.response = answer;
+            userData.timestamp = new Date().toLocaleString();
+            
+            document.getElementById('step3').classList.remove('active');
+            
+            const finalMessage = document.getElementById('finalMessage');
+            const formNotice = document.getElementById('formNotice');
+            
+            if (answer === 'yes') {
+                finalMessage.innerHTML = `
+                    <div class="hearts">💕💖💕</div>
+                    <div>Yesss! This is amazing!</div>
+                    <div>Can't wait to talk more! 😍</div>
+                    
+                    <dotlottie-wc src="https://lottie.host/d53b9328-edcc-4608-8b11-0aa46147bdc7/nSipiTSluk.lottie" 
+                       style="width: 300px; height: 300px; margin: 20px auto; display: block;" 
+                       speed="1" autoplay loop></dotlottie-wc>
+                `;
+                formNotice.innerHTML = `
+                    <strong>Response sent successfully!</strong><br>
+                    Thanks for being honest! 💖
+                `;
+                // Start confetti animation
+                startConfetti();
+            } else {
+                finalMessage.innerHTML = `
+                    <div>Aww, that's okay! 💙</div>
+                    <div>Thanks for being honest!</div>
+                    <div>Stay awesome! ✨</div>
+                `;
+                formNotice.innerHTML = `
+                    <strong>Response sent successfully!</strong><br>
+                    Thanks for being honest! 💜
+                `;
+                // Start angry faces animation AND angry popup
+                startAngryFaces();
+                showAngryPopup();
+            }
+            
+            document.getElementById('step4').classList.add('active');
+            submitResponse();
+        }
+        
+        function startConfetti() {
+            const confettiEmojis = ['🎉', '🎊', '✨', '💖', '💕', '🌟', '⭐', '💫'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    // Remove confetti after animation
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 100);
+            }
+        }
+        
+        function startAngryFaces() {
+            const angryEmojis = ['😠', '😡', '🤬', '👿', '😤', '💢', '😾', '🙄'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const angry = document.createElement('div');
+                    angry.className = 'angry-face';
+                    angry.textContent = angryEmojis[Math.floor(Math.random() * angryEmojis.length)];
+                    angry.style.left = Math.random() * 100 + 'vw';
+                    angry.style.animationDelay = Math.random() * 2 + 's';
+                    angry.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                    document.body.appendChild(angry);
+                    
+                    // Remove angry face after animation
+                    setTimeout(() => {
+                        angry.remove();
+                    }, 4000);
+                }, i * 150);
+            }
+        }
+        
+        function showAngryPopup() {
+            // Create angry popup animation that grows from center
+            const popup = document.createElement('div');
+            popup.className = 'angry-popup';
+            popup.innerHTML = `
+                <dotlottie-wc src="https://lottie.host/58c42818-1541-4be0-b6fa-6b1ece2e0caf/ftbaNPVSPZ.lottie" 
+                               style="width: 400px; height: 400px;" 
+                               speed="1.5" autoplay loop></dotlottie-wc>
+            `;
+            document.body.appendChild(popup);
+            
+            // Remove popup after 4 seconds
+            setTimeout(() => {
+                popup.style.animation = 'popupGrow 0.5s ease-out reverse forwards';
+                setTimeout(() => {
+                    if (document.body.contains(popup)) {
+                        document.body.removeChild(popup);
+                    }
+                }, 500);
+            }, 4000);
+        }
+        
+        function submitResponse() {
+            // Send email using fetch (no redirect at all)
+            const formData = new FormData();
+            formData.append('_subject', userData.name + ' responded: ' + userData.response + '!');
+            formData.append('name', userData.name);
+            formData.append('age', userData.age);
+            formData.append('response', userData.response);
+            formData.append('timestamp', userData.timestamp);
+            formData.append('_captcha', 'false');
+            
+            // Use fetch to send without any page redirect
+            fetch('https://formsubmit.co/mommogamer10@gmail.com', {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                console.log('Email sent successfully');
+            }).catch(() => {
+                console.log('Email sent (no-cors mode)');
+            });
+            
+            // Backup method - create form that submits to invisible iframe
+            setTimeout(() => {
+                const iframe = document.createElement('iframe');
+                iframe.name = 'hiddenFrame';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                
+                const form = document.createElement('form');
+                form.target = 'hiddenFrame';
+                form.action = 'https://formsubmit.co/mommogamer10@gmail.com';
+                form.method = 'POST';
+                form.style.display = 'none';
+                
+                const fields = [
+                    ['_subject', userData.name + ' responded: ' + userData.response + '!'],
+                    ['name', userData.name],
+                    ['age', userData.age], 
+                    ['response', userData.response],
+                    ['timestamp', userData.timestamp],
+                    ['_captcha', 'false']
+                ];
+                
+                fields.forEach(field => {
+                    const input = document.createElement('input');
+                    input.name = field[0];
+                    input.value = field[1];
+                    input.type = 'hidden';
+                    form.appendChild(input);
+                });
+                
+                document.body.appendChild(form);
+                form.submit();
+                
+                // Clean up
+                setTimeout(() => {
+                    if (document.body.contains(form)) document.body.removeChild(form);
+                    if (document.body.contains(iframe)) document.body.removeChild(iframe);
+                }, 5000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
